@@ -26,8 +26,8 @@ class CurrencyService implements ICurrencyService {
     try {
       final response = await _currencyRepository.getBtc();
       final model = BtcModel(
-        id: response.time.updated.microsecondsSinceEpoch.toString(),
-        updated: response.time.updated,
+        id: response.time.updatedISO.microsecondsSinceEpoch.toString(),
+        updated: response.time.updatedISO,
         usd: CurrencyModel(
             code: response.bpi.usd.code,
             rate: response.bpi.usd.rate,
@@ -45,8 +45,8 @@ class CurrencyService implements ICurrencyService {
     try {
       final response = await _currencyRepository.getThb();
       final model = ThbModel(
-        id: response.time.updated.microsecondsSinceEpoch.toString(),
-        updated: response.time.updated,
+        id: response.time.updatedISO.microsecondsSinceEpoch.toString(),
+        updated: response.time.updatedISO,
         thb: CurrencyModel(
             code: response.bpi.usd.code,
             rate: response.bpi.usd.rate,

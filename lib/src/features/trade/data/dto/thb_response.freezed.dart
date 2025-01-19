@@ -22,7 +22,6 @@ ThbResponse _$ThbResponseFromJson(Map<String, dynamic> json) {
 mixin _$ThbResponse {
   TimeResponse get time => throw _privateConstructorUsedError;
   String get disclaimer => throw _privateConstructorUsedError;
-  String get chartName => throw _privateConstructorUsedError;
   BpiThbResponse get bpi => throw _privateConstructorUsedError;
 
   /// Serializes this ThbResponse to a JSON map.
@@ -41,11 +40,7 @@ abstract class $ThbResponseCopyWith<$Res> {
           ThbResponse value, $Res Function(ThbResponse) then) =
       _$ThbResponseCopyWithImpl<$Res, ThbResponse>;
   @useResult
-  $Res call(
-      {TimeResponse time,
-      String disclaimer,
-      String chartName,
-      BpiThbResponse bpi});
+  $Res call({TimeResponse time, String disclaimer, BpiThbResponse bpi});
 
   $TimeResponseCopyWith<$Res> get time;
   $BpiThbResponseCopyWith<$Res> get bpi;
@@ -68,7 +63,6 @@ class _$ThbResponseCopyWithImpl<$Res, $Val extends ThbResponse>
   $Res call({
     Object? time = null,
     Object? disclaimer = null,
-    Object? chartName = null,
     Object? bpi = null,
   }) {
     return _then(_value.copyWith(
@@ -79,10 +73,6 @@ class _$ThbResponseCopyWithImpl<$Res, $Val extends ThbResponse>
       disclaimer: null == disclaimer
           ? _value.disclaimer
           : disclaimer // ignore: cast_nullable_to_non_nullable
-              as String,
-      chartName: null == chartName
-          ? _value.chartName
-          : chartName // ignore: cast_nullable_to_non_nullable
               as String,
       bpi: null == bpi
           ? _value.bpi
@@ -120,11 +110,7 @@ abstract class _$$ThbResponseImplCopyWith<$Res>
       __$$ThbResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {TimeResponse time,
-      String disclaimer,
-      String chartName,
-      BpiThbResponse bpi});
+  $Res call({TimeResponse time, String disclaimer, BpiThbResponse bpi});
 
   @override
   $TimeResponseCopyWith<$Res> get time;
@@ -147,7 +133,6 @@ class __$$ThbResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? time = null,
     Object? disclaimer = null,
-    Object? chartName = null,
     Object? bpi = null,
   }) {
     return _then(_$ThbResponseImpl(
@@ -158,10 +143,6 @@ class __$$ThbResponseImplCopyWithImpl<$Res>
       disclaimer: null == disclaimer
           ? _value.disclaimer
           : disclaimer // ignore: cast_nullable_to_non_nullable
-              as String,
-      chartName: null == chartName
-          ? _value.chartName
-          : chartName // ignore: cast_nullable_to_non_nullable
               as String,
       bpi: null == bpi
           ? _value.bpi
@@ -175,10 +156,7 @@ class __$$ThbResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ThbResponseImpl implements _ThbResponse {
   const _$ThbResponseImpl(
-      {required this.time,
-      required this.disclaimer,
-      required this.chartName,
-      required this.bpi});
+      {required this.time, required this.disclaimer, required this.bpi});
 
   factory _$ThbResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ThbResponseImplFromJson(json);
@@ -188,13 +166,11 @@ class _$ThbResponseImpl implements _ThbResponse {
   @override
   final String disclaimer;
   @override
-  final String chartName;
-  @override
   final BpiThbResponse bpi;
 
   @override
   String toString() {
-    return 'ThbResponse(time: $time, disclaimer: $disclaimer, chartName: $chartName, bpi: $bpi)';
+    return 'ThbResponse(time: $time, disclaimer: $disclaimer, bpi: $bpi)';
   }
 
   @override
@@ -205,15 +181,12 @@ class _$ThbResponseImpl implements _ThbResponse {
             (identical(other.time, time) || other.time == time) &&
             (identical(other.disclaimer, disclaimer) ||
                 other.disclaimer == disclaimer) &&
-            (identical(other.chartName, chartName) ||
-                other.chartName == chartName) &&
             (identical(other.bpi, bpi) || other.bpi == bpi));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, time, disclaimer, chartName, bpi);
+  int get hashCode => Object.hash(runtimeType, time, disclaimer, bpi);
 
   /// Create a copy of ThbResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -235,7 +208,6 @@ abstract class _ThbResponse implements ThbResponse {
   const factory _ThbResponse(
       {required final TimeResponse time,
       required final String disclaimer,
-      required final String chartName,
       required final BpiThbResponse bpi}) = _$ThbResponseImpl;
 
   factory _ThbResponse.fromJson(Map<String, dynamic> json) =
@@ -245,8 +217,6 @@ abstract class _ThbResponse implements ThbResponse {
   TimeResponse get time;
   @override
   String get disclaimer;
-  @override
-  String get chartName;
   @override
   BpiThbResponse get bpi;
 

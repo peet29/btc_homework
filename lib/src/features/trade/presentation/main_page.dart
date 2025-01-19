@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:btc_app/src/features/trade/presentation/controller/main_controller.dart';
 import 'package:btc_app/src/features/trade/presentation/widgets/line_chart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +17,9 @@ class _MainPageState extends ConsumerState<MainPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {});
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(mainControllerProvider.notifier).startFetchData();
+    });
   }
 
   @override
@@ -23,17 +28,24 @@ class _MainPageState extends ConsumerState<MainPage> {
         appBar: AppBar(
           title: const Text('Trade'),
         ),
-        body: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.only(
-                left: 10.w,
-                right: 10.w,
-              ),
-              height: 200.h,
-              child: LineChartWidget(),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            ref.read(mainControllerProvider.notifier).startFetchData();
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(
+                    left: 10.w,
+                    right: 10.w,
+                  ),
+                  height: 200.h,
+                  child: LineChartWidget(),
+                ),
+              ],
             ),
-          ],
+          ),
         ));
   }
 }

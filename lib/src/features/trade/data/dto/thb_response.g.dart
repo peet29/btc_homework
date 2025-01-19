@@ -10,7 +10,6 @@ _$ThbResponseImpl _$$ThbResponseImplFromJson(Map<String, dynamic> json) =>
     _$ThbResponseImpl(
       time: TimeResponse.fromJson(json['time'] as Map<String, dynamic>),
       disclaimer: json['disclaimer'] as String,
-      chartName: json['chartName'] as String,
       bpi: BpiThbResponse.fromJson(json['bpi'] as Map<String, dynamic>),
     );
 
@@ -18,6 +17,5 @@ Map<String, dynamic> _$$ThbResponseImplToJson(_$ThbResponseImpl instance) =>
     <String, dynamic>{
       'time': instance.time,
       'disclaimer': instance.disclaimer,
-      'chartName': instance.chartName,
       'bpi': instance.bpi,
     };

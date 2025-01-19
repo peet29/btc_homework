@@ -10,7 +10,6 @@ class ThbResponse with _$ThbResponse {
   const factory ThbResponse({
     required TimeResponse time,
     required String disclaimer,
-    required String chartName,
     required BpiThbResponse bpi,
   }) = _ThbResponse;
 

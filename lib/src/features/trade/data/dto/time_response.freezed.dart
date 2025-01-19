@@ -20,10 +20,7 @@ TimeResponse _$TimeResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TimeResponse {
-  DateTime get updated => throw _privateConstructorUsedError;
   DateTime get updatedISO => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updateduk')
-  DateTime get updateEduk => throw _privateConstructorUsedError;
 
   /// Serializes this TimeResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,10 +38,7 @@ abstract class $TimeResponseCopyWith<$Res> {
           TimeResponse value, $Res Function(TimeResponse) then) =
       _$TimeResponseCopyWithImpl<$Res, TimeResponse>;
   @useResult
-  $Res call(
-      {DateTime updated,
-      DateTime updatedISO,
-      @JsonKey(name: 'updateduk') DateTime updateEduk});
+  $Res call({DateTime updatedISO});
 }
 
 /// @nodoc
@@ -62,22 +56,12 @@ class _$TimeResponseCopyWithImpl<$Res, $Val extends TimeResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? updated = null,
     Object? updatedISO = null,
-    Object? updateEduk = null,
   }) {
     return _then(_value.copyWith(
-      updated: null == updated
-          ? _value.updated
-          : updated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       updatedISO: null == updatedISO
           ? _value.updatedISO
           : updatedISO // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updateEduk: null == updateEduk
-          ? _value.updateEduk
-          : updateEduk // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ) as $Val);
   }
@@ -91,10 +75,7 @@ abstract class _$$TimeResponseImplCopyWith<$Res>
       __$$TimeResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {DateTime updated,
-      DateTime updatedISO,
-      @JsonKey(name: 'updateduk') DateTime updateEduk});
+  $Res call({DateTime updatedISO});
 }
 
 /// @nodoc
@@ -110,22 +91,12 @@ class __$$TimeResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? updated = null,
     Object? updatedISO = null,
-    Object? updateEduk = null,
   }) {
     return _then(_$TimeResponseImpl(
-      updated: null == updated
-          ? _value.updated
-          : updated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       updatedISO: null == updatedISO
           ? _value.updatedISO
           : updatedISO // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updateEduk: null == updateEduk
-          ? _value.updateEduk
-          : updateEduk // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -134,25 +105,17 @@ class __$$TimeResponseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TimeResponseImpl implements _TimeResponse {
-  const _$TimeResponseImpl(
-      {required this.updated,
-      required this.updatedISO,
-      @JsonKey(name: 'updateduk') required this.updateEduk});
+  const _$TimeResponseImpl({required this.updatedISO});
 
   factory _$TimeResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$TimeResponseImplFromJson(json);
 
   @override
-  final DateTime updated;
-  @override
   final DateTime updatedISO;
-  @override
-  @JsonKey(name: 'updateduk')
-  final DateTime updateEduk;
 
   @override
   String toString() {
-    return 'TimeResponse(updated: $updated, updatedISO: $updatedISO, updateEduk: $updateEduk)';
+    return 'TimeResponse(updatedISO: $updatedISO)';
   }
 
   @override
@@ -160,16 +123,13 @@ class _$TimeResponseImpl implements _TimeResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TimeResponseImpl &&
-            (identical(other.updated, updated) || other.updated == updated) &&
             (identical(other.updatedISO, updatedISO) ||
-                other.updatedISO == updatedISO) &&
-            (identical(other.updateEduk, updateEduk) ||
-                other.updateEduk == updateEduk));
+                other.updatedISO == updatedISO));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, updated, updatedISO, updateEduk);
+  int get hashCode => Object.hash(runtimeType, updatedISO);
 
   /// Create a copy of TimeResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -188,22 +148,14 @@ class _$TimeResponseImpl implements _TimeResponse {
 }
 
 abstract class _TimeResponse implements TimeResponse {
-  const factory _TimeResponse(
-          {required final DateTime updated,
-          required final DateTime updatedISO,
-          @JsonKey(name: 'updateduk') required final DateTime updateEduk}) =
+  const factory _TimeResponse({required final DateTime updatedISO}) =
       _$TimeResponseImpl;
 
   factory _TimeResponse.fromJson(Map<String, dynamic> json) =
       _$TimeResponseImpl.fromJson;
 
   @override
-  DateTime get updated;
-  @override
   DateTime get updatedISO;
-  @override
-  @JsonKey(name: 'updateduk')
-  DateTime get updateEduk;
 
   /// Create a copy of TimeResponse
   /// with the given fields replaced by the non-null parameter values.
