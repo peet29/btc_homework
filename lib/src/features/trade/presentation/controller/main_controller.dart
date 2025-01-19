@@ -28,22 +28,14 @@ class MainController extends _$MainController {
         btcList: const AsyncValue.loading(),
         thbList: const AsyncValue.loading());
 
-    final btcStream = ref
-        .read(currencyServiceProvider)
-        .getBtc()
-        .asStream()
-        .map((event) => event.tryGetSuccess())
-        .whereNotNull();
-    final thbStream = ref
-        .read(currencyServiceProvider)
-        .getThb()
-        .asStream()
-        .map((event) => event.tryGetSuccess())
-        .whereNotNull();
+    final (btcStream, thbStream) = _getStream();
 
     _subscription = MergeStream([
       ZipStream.zip2(btcStream, thbStream, (a, b) => [a, b]),
       Stream.periodic(const Duration(seconds: 30)).switchMap((_) {
+        debugPrint('periodic');
+        final (btcStream, thbStream) = _getStream();
+
         return CombineLatestStream([btcStream, thbStream], (data) => data);
       })
     ]).listen((data) {
@@ -51,7 +43,7 @@ class MainController extends _$MainController {
       final thbData = data[1] as ThbModel;
 
       debugPrint('btcData: $btcData');
-      debugPrint('btcData: $btcData');
+      debugPrint('thbData: $thbData');
 
       final btc = state.btcList.value ?? [];
       final thb = state.thbList.value ?? [];
@@ -77,39 +69,21 @@ class MainController extends _$MainController {
     state = state.copyWith(isThb: !state.isThb);
   }
 
-  // Future<void> getBtc() async {
-  //   final result = await ref.read(currencyServiceProvider).getBtc();
+  (Stream<BtcModel>, Stream<ThbModel>) _getStream() {
+    final btcStream = ref
+        .read(currencyServiceProvider)
+        .getBtc()
+        .asStream()
+        .map((event) => event.tryGetSuccess())
+        .whereNotNull();
 
-  //   result.when((success) {
-  //     final btc = state.btcList.value ?? [];
-  //     state = state.copyWith(
-  //       btcList: AsyncValue.data(
-  //         [
-  //           ...btc,
-  //           success,
-  //         ],
-  //       ),
-  //     );
-  //   }, (error) {
-  //     debugPrint(error.message);
-  //   });
-  // }
+    final thbStream = ref
+        .read(currencyServiceProvider)
+        .getThb()
+        .asStream()
+        .map((event) => event.tryGetSuccess())
+        .whereNotNull();
 
-  // Future<void> getThb() async {
-  //   final result = await ref.read(currencyServiceProvider).getThb();
-
-  //   result.when((success) {
-  //     final thb = state.thbList.value ?? [];
-  //     state = state.copyWith(
-  //       thbList: AsyncValue.data(
-  //         [
-  //           ...thb,
-  //           success,
-  //         ],
-  //       ),
-  //     );
-  //   }, (error) {
-  //     debugPrint(error.message);
-  //   });
-  // }
+    return (btcStream, thbStream);
+  }
 }

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:btc_app/src/features/trade/presentation/controller/main_controller.dart';
 import 'package:btc_app/src/features/trade/presentation/widgets/line_chart_widget.dart';
 import 'package:flutter/material.dart';

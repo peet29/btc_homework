@@ -48,10 +48,10 @@ class CurrencyService implements ICurrencyService {
         id: response.time.updatedISO.microsecondsSinceEpoch.toString(),
         updated: response.time.updatedISO,
         thb: CurrencyModel(
-            code: response.bpi.usd.code,
-            rate: response.bpi.usd.rate,
-            description: response.bpi.usd.description,
-            rateFloat: response.bpi.usd.rateFloat),
+            code: response.bpi.thb.code,
+            rate: response.bpi.thb.rate,
+            description: response.bpi.thb.description,
+            rateFloat: response.bpi.thb.rateFloat),
       );
       return Success(model);
     } on Failure catch (e) {
