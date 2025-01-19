@@ -41,19 +41,17 @@ class _MainPageState extends ConsumerState<MainPage> {
             ),
           ],
         ),
-        body: RefreshIndicator(
-          onRefresh: () async {
-            ref.read(mainControllerProvider.notifier).startFetchData();
-          },
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
+                SizedBox(height: 10.h),
                 Container(
                   padding: EdgeInsets.only(
-                    left: 10.w,
-                    right: 10.w,
+                    left: 4.w,
+                    right: 4.w,
                   ),
-                  height: 200.h,
+                  height: 400.h,
                   child: LineChartWidget(),
                 ),
                 const ShowDetail(),

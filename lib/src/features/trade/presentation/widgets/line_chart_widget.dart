@@ -1,4 +1,8 @@
+import 'package:btc_app/src/features/trade/domain/btc_model.dart';
+import 'package:btc_app/src/features/trade/domain/thb_model.dart';
+import 'package:btc_app/src/features/trade/presentation/controller/main_controller.dart';
 import 'package:btc_app/theme/colors.dart';
+import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,12 +16,42 @@ class LineChartWidget extends ConsumerWidget {
   ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return LineChart(
-      mainData(),
-    );
+    final isThb =
+        ref.watch(mainControllerProvider.select((value) => value.isThb));
+    final btcList =
+        ref.watch(mainControllerProvider.select((value) => value.btcList));
+
+    final thbList =
+        ref.watch(mainControllerProvider.select((value) => value.thbList));
+
+    if (isThb) {
+      return thbList.when(data: (list) {
+        return LineChart(
+          thbData(list),
+        );
+      }, error: (error, stackTrace) {
+        return Text(error.toString());
+      }, loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      });
+    }
+
+    return btcList.when(data: (list) {
+      return LineChart(
+        btcData(list),
+      );
+    }, error: (error, stackTrace) {
+      return Text(error.toString());
+    }, loading: () {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    });
   }
 
-  LineChartData mainData() {
+  LineChartData thbData(List<ThbModel> thbList) {
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -37,50 +71,35 @@ class LineChartWidget extends ConsumerWidget {
           );
         },
       ),
-      titlesData: FlTitlesData(
+      titlesData: const FlTitlesData(
         show: true,
-        rightTitles: const AxisTitles(
+        rightTitles: AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        topTitles: const AxisTitles(
+        topTitles: AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 30,
-            interval: 1,
-            getTitlesWidget: bottomTitleWidgets,
-          ),
-        ),
-        leftTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            interval: 1,
-            getTitlesWidget: leftTitleWidgets,
-            reservedSize: 42,
-          ),
-        ),
+        // bottomTitles: AxisTitles(
+        //   sideTitles: SideTitles(
+        //     showTitles: true,
+        //     reservedSize: 30,
+        //     interval: 1,
+        //     getTitlesWidget: bottomTitleWidgets,
+        //   ),
+        // ),
       ),
       borderData: FlBorderData(
         show: true,
         border: Border.all(color: const Color(0xff37434d)),
       ),
-      minX: 0,
-      maxX: 11,
-      minY: 0,
-      maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
-          ],
+          spots: thbList
+              .mapIndexed((index, e) => FlSpot(
+                    index.toDouble(),
+                    e.thb.rateFloat,
+                  ))
+              .toList(),
           isCurved: true,
           gradient: LinearGradient(
             colors: gradientColors,
@@ -103,27 +122,75 @@ class LineChartWidget extends ConsumerWidget {
     );
   }
 
-  Widget leftTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 15,
+  LineChartData btcData(List<BtcModel> btcList) {
+    return LineChartData(
+      gridData: FlGridData(
+        show: true,
+        drawVerticalLine: true,
+        horizontalInterval: 1,
+        verticalInterval: 1,
+        getDrawingHorizontalLine: (value) {
+          return const FlLine(
+            color: AppColors.mainGridLineColor,
+            strokeWidth: 1,
+          );
+        },
+        getDrawingVerticalLine: (value) {
+          return const FlLine(
+            color: AppColors.mainGridLineColor,
+            strokeWidth: 1,
+          );
+        },
+      ),
+      titlesData: const FlTitlesData(
+        show: true,
+        rightTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        topTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        // bottomTitles: AxisTitles(
+        //   sideTitles: SideTitles(
+        //     showTitles: true,
+        //     reservedSize: 30,
+        //     interval: 1,
+        //     getTitlesWidget: bottomTitleWidgets,
+        //   ),
+        // ),
+      ),
+      borderData: FlBorderData(
+        show: true,
+        border: Border.all(color: const Color(0xff37434d)),
+      ),
+      lineBarsData: [
+        LineChartBarData(
+          spots: btcList
+              .mapIndexed((index, e) => FlSpot(
+                    index.toDouble(),
+                    e.usd.rateFloat,
+                  ))
+              .toList(),
+          isCurved: true,
+          gradient: LinearGradient(
+            colors: gradientColors,
+          ),
+          barWidth: 5,
+          isStrokeCapRound: true,
+          dotData: const FlDotData(
+            show: false,
+          ),
+          belowBarData: BarAreaData(
+            show: true,
+            gradient: LinearGradient(
+              colors: gradientColors
+                  .map((color) => color.withValues(alpha: 0.3))
+                  .toList(),
+            ),
+          ),
+        ),
+      ],
     );
-    String text;
-    switch (value.toInt()) {
-      case 1:
-        text = '10K';
-        break;
-      case 3:
-        text = '30k';
-        break;
-      case 5:
-        text = '50k';
-        break;
-      default:
-        return Container();
-    }
-
-    return Text(text, style: style, textAlign: TextAlign.left);
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
@@ -131,25 +198,16 @@ class LineChartWidget extends ConsumerWidget {
       fontWeight: FontWeight.bold,
       fontSize: 16,
     );
-    Widget text;
-    switch (value.toInt()) {
-      case 2:
-        text = const Text('MAR', style: style);
-        break;
-      case 5:
-        text = const Text('JUN', style: style);
-        break;
-      case 8:
-        text = const Text('SEP', style: style);
-        break;
-      default:
-        text = const Text('', style: style);
-        break;
-    }
+
+    final valueInt = value.toInt();
+    final valueText = valueInt.toString();
 
     return SideTitleWidget(
       meta: meta,
-      child: text,
+      child: Text(
+        value % 2 == 0 ? valueText : '',
+        style: style,
+      ),
     );
   }
 }
