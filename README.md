@@ -1,1 +1,3 @@
-# btc_homework
+# btc_app
+
+A new Flutter project.
