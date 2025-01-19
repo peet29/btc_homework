@@ -6,7 +6,8 @@ part 'thb_model.freezed.dart';
 @freezed
 class ThbModel with _$ThbModel {
   const factory ThbModel({
-    required String time,
+    required String id,
+    required DateTime updated,
     required CurrencyModel thb,
   }) = _ThbModel;
 }

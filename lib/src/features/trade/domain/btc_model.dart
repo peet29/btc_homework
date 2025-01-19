@@ -6,7 +6,8 @@ part 'btc_model.freezed.dart';
 @freezed
 class BtcModel with _$BtcModel {
   const factory BtcModel({
-    required String time,
+    required String id,
+    required DateTime updated,
     required CurrencyModel usd,
   }) = _BtcModel;
 }

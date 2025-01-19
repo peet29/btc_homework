@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BtcModel {
-  String get time => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  DateTime get updated => throw _privateConstructorUsedError;
   CurrencyModel get usd => throw _privateConstructorUsedError;
 
   /// Create a copy of BtcModel
@@ -31,7 +32,7 @@ abstract class $BtcModelCopyWith<$Res> {
   factory $BtcModelCopyWith(BtcModel value, $Res Function(BtcModel) then) =
       _$BtcModelCopyWithImpl<$Res, BtcModel>;
   @useResult
-  $Res call({String time, CurrencyModel usd});
+  $Res call({String id, DateTime updated, CurrencyModel usd});
 
   $CurrencyModelCopyWith<$Res> get usd;
 }
@@ -51,14 +52,19 @@ class _$BtcModelCopyWithImpl<$Res, $Val extends BtcModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = null,
+    Object? id = null,
+    Object? updated = null,
     Object? usd = null,
   }) {
     return _then(_value.copyWith(
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       usd: null == usd
           ? _value.usd
           : usd // ignore: cast_nullable_to_non_nullable
@@ -85,7 +91,7 @@ abstract class _$$BtcModelImplCopyWith<$Res>
       __$$BtcModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String time, CurrencyModel usd});
+  $Res call({String id, DateTime updated, CurrencyModel usd});
 
   @override
   $CurrencyModelCopyWith<$Res> get usd;
@@ -104,14 +110,19 @@ class __$$BtcModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = null,
+    Object? id = null,
+    Object? updated = null,
     Object? usd = null,
   }) {
     return _then(_$BtcModelImpl(
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       usd: null == usd
           ? _value.usd
           : usd // ignore: cast_nullable_to_non_nullable
@@ -123,16 +134,19 @@ class __$$BtcModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BtcModelImpl implements _BtcModel {
-  const _$BtcModelImpl({required this.time, required this.usd});
+  const _$BtcModelImpl(
+      {required this.id, required this.updated, required this.usd});
 
   @override
-  final String time;
+  final String id;
+  @override
+  final DateTime updated;
   @override
   final CurrencyModel usd;
 
   @override
   String toString() {
-    return 'BtcModel(time: $time, usd: $usd)';
+    return 'BtcModel(id: $id, updated: $updated, usd: $usd)';
   }
 
   @override
@@ -140,12 +154,13 @@ class _$BtcModelImpl implements _BtcModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BtcModelImpl &&
-            (identical(other.time, time) || other.time == time) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.updated, updated) || other.updated == updated) &&
             (identical(other.usd, usd) || other.usd == usd));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, time, usd);
+  int get hashCode => Object.hash(runtimeType, id, updated, usd);
 
   /// Create a copy of BtcModel
   /// with the given fields replaced by the non-null parameter values.
@@ -158,11 +173,14 @@ class _$BtcModelImpl implements _BtcModel {
 
 abstract class _BtcModel implements BtcModel {
   const factory _BtcModel(
-      {required final String time,
+      {required final String id,
+      required final DateTime updated,
       required final CurrencyModel usd}) = _$BtcModelImpl;
 
   @override
-  String get time;
+  String get id;
+  @override
+  DateTime get updated;
   @override
   CurrencyModel get usd;
 

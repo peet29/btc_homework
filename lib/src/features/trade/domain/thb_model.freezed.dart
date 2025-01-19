@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ThbModel {
-  String get time => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  DateTime get updated => throw _privateConstructorUsedError;
   CurrencyModel get thb => throw _privateConstructorUsedError;
 
   /// Create a copy of ThbModel
@@ -31,7 +32,7 @@ abstract class $ThbModelCopyWith<$Res> {
   factory $ThbModelCopyWith(ThbModel value, $Res Function(ThbModel) then) =
       _$ThbModelCopyWithImpl<$Res, ThbModel>;
   @useResult
-  $Res call({String time, CurrencyModel thb});
+  $Res call({String id, DateTime updated, CurrencyModel thb});
 
   $CurrencyModelCopyWith<$Res> get thb;
 }
@@ -51,14 +52,19 @@ class _$ThbModelCopyWithImpl<$Res, $Val extends ThbModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = null,
+    Object? id = null,
+    Object? updated = null,
     Object? thb = null,
   }) {
     return _then(_value.copyWith(
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       thb: null == thb
           ? _value.thb
           : thb // ignore: cast_nullable_to_non_nullable
@@ -85,7 +91,7 @@ abstract class _$$ThbModelImplCopyWith<$Res>
       __$$ThbModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String time, CurrencyModel thb});
+  $Res call({String id, DateTime updated, CurrencyModel thb});
 
   @override
   $CurrencyModelCopyWith<$Res> get thb;
@@ -104,14 +110,19 @@ class __$$ThbModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? time = null,
+    Object? id = null,
+    Object? updated = null,
     Object? thb = null,
   }) {
     return _then(_$ThbModelImpl(
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       thb: null == thb
           ? _value.thb
           : thb // ignore: cast_nullable_to_non_nullable
@@ -123,16 +134,19 @@ class __$$ThbModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ThbModelImpl implements _ThbModel {
-  const _$ThbModelImpl({required this.time, required this.thb});
+  const _$ThbModelImpl(
+      {required this.id, required this.updated, required this.thb});
 
   @override
-  final String time;
+  final String id;
+  @override
+  final DateTime updated;
   @override
   final CurrencyModel thb;
 
   @override
   String toString() {
-    return 'ThbModel(time: $time, thb: $thb)';
+    return 'ThbModel(id: $id, updated: $updated, thb: $thb)';
   }
 
   @override
@@ -140,12 +154,13 @@ class _$ThbModelImpl implements _ThbModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ThbModelImpl &&
-            (identical(other.time, time) || other.time == time) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.updated, updated) || other.updated == updated) &&
             (identical(other.thb, thb) || other.thb == thb));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, time, thb);
+  int get hashCode => Object.hash(runtimeType, id, updated, thb);
 
   /// Create a copy of ThbModel
   /// with the given fields replaced by the non-null parameter values.
@@ -158,11 +173,14 @@ class _$ThbModelImpl implements _ThbModel {
 
 abstract class _ThbModel implements ThbModel {
   const factory _ThbModel(
-      {required final String time,
+      {required final String id,
+      required final DateTime updated,
       required final CurrencyModel thb}) = _$ThbModelImpl;
 
   @override
-  String get time;
+  String get id;
+  @override
+  DateTime get updated;
   @override
   CurrencyModel get thb;
 
