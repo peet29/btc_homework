@@ -159,7 +159,7 @@ class LineChartWidget extends ConsumerWidget {
             showTitles: true,
             minIncluded: true,
             reservedSize: 30,
-            interval: 3,
+            interval: 1,
             getTitlesWidget: (value, meta) {
               final btc = btcList[value.toInt()];
               return bottomTitleWidgets(value, meta, btc.updated);
