@@ -6,6 +6,7 @@ import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class LineChartWidget extends ConsumerWidget {
   LineChartWidget({super.key});
@@ -71,22 +72,25 @@ class LineChartWidget extends ConsumerWidget {
           );
         },
       ),
-      titlesData: const FlTitlesData(
+      titlesData: FlTitlesData(
         show: true,
-        rightTitles: AxisTitles(
+        rightTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        topTitles: AxisTitles(
+        topTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        // bottomTitles: AxisTitles(
-        //   sideTitles: SideTitles(
-        //     showTitles: true,
-        //     reservedSize: 30,
-        //     interval: 1,
-        //     getTitlesWidget: bottomTitleWidgets,
-        //   ),
-        // ),
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            reservedSize: 30,
+            interval: 1,
+            getTitlesWidget: (value, meta) {
+              final thb = thbList[value.toInt()];
+              return bottomTitleWidgets(value, meta, thb.updated);
+            },
+          ),
+        ),
       ),
       borderData: FlBorderData(
         show: true,
@@ -142,22 +146,26 @@ class LineChartWidget extends ConsumerWidget {
           );
         },
       ),
-      titlesData: const FlTitlesData(
+      titlesData: FlTitlesData(
         show: true,
-        rightTitles: AxisTitles(
+        rightTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        topTitles: AxisTitles(
+        topTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        // bottomTitles: AxisTitles(
-        //   sideTitles: SideTitles(
-        //     showTitles: true,
-        //     reservedSize: 30,
-        //     interval: 1,
-        //     getTitlesWidget: bottomTitleWidgets,
-        //   ),
-        // ),
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            minIncluded: true,
+            reservedSize: 30,
+            interval: 3,
+            getTitlesWidget: (value, meta) {
+              final btc = btcList[value.toInt()];
+              return bottomTitleWidgets(value, meta, btc.updated);
+            },
+          ),
+        ),
       ),
       borderData: FlBorderData(
         show: true,
@@ -193,19 +201,20 @@ class LineChartWidget extends ConsumerWidget {
     );
   }
 
-  Widget bottomTitleWidgets(double value, TitleMeta meta) {
+  Widget bottomTitleWidgets(double value, TitleMeta meta, DateTime date) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16,
+      fontSize: 13,
     );
 
-    final valueInt = value.toInt();
-    final valueText = valueInt.toString();
+    final dateZone =
+        DateTime.fromMillisecondsSinceEpoch(date.millisecondsSinceEpoch);
+    final formatter = DateFormat('HH:mm:ss');
 
     return SideTitleWidget(
       meta: meta,
       child: Text(
-        value % 2 == 0 ? valueText : '',
+        formatter.format(dateZone),
         style: style,
       ),
     );

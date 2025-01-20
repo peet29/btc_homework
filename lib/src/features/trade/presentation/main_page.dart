@@ -54,6 +54,8 @@ class _MainPageState extends ConsumerState<MainPage> {
                   height: 400.h,
                   child: LineChartWidget(),
                 ),
+                SizedBox(height: 30.h),
+                const Divider(),
                 const ShowDetail(),
               ],
             ),
